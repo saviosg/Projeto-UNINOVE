@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../estilo/global.css" />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+    crossorigin="anonymous"
+  />
+    <title> Lista Departamentos </title>
+</head>
+<body>
+    <table>         
+        <thead>
+            <tr>
+                <th> <button onclick="redirecionarPaginaInicial()">Voltar para Home</button> </th>
+                <th><p>Id Departamento </p></th>
+                <th><p>Id Empresa</p> </th>
+                <th><p>Nome do Departamento</p></th>
+                <th><p>Nome da Empresa</p></th>
+                <th><p>Editar</p></th>
+                <th><p>Excluir</p></th>
+            </tr>
+        </thead>
+        
+        <tbody class="lista-departamento">
+            
+        </tbody>
+    </table>
+
+    <div id="id02" class="modal">
+        <span
+          onclick="document.getElementById('id02').style.display='none'"
+          class="close"
+          title="Close Modal"
+          >&times;</span
+        >
+        <div class="modal-content">
+          <div class="container">
+            <h1>Exclusão de cadastro</h1>
+            <p>Tem certeza que deseja excluir este cadastro?</p>
+
+            <div class="clearfix">
+              <button type="button" id="cancelButton" class="confirmbtn" onclick="redirecionarPaginaLista()" class="confirmbtn">Cancelar</button>
+              <button type="button" id="deleteButton" class="deletebtn" onclick="removeItem({idEmpresa})" class="confirmbtn">Confirmar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="./../../controllers/departamento/departamento-lista.js"></script>
+</body>
+</html>

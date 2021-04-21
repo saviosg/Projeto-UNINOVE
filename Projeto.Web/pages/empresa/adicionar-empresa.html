@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../estilo/global.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Adicionar Empresa</title>
+  </head>
+  <body>
+    <div class="espaco-form">
+      <h4>
+        <strong> Adicionar Empresa </strong>
+      </h4>
+      <form method="POST" name="formEmpresa" onsubmit="return checkForm(this)">
+        <br />
+        
+        <div>
+        <label for="nomeEmpresa">Nome da Empresa </label>
+        <input type="text" id="nomeEmpresa" name="nomeEmpresa" />
+        </div>
+        <br />
+        
+        <div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email"/> <span id="error-email"></span>
+        </div>
+        <br />
+        
+        <div>
+        <label for="cnpj">CNPJ</label>
+        <input
+          type="text"
+          id="cnpj"
+          maxlength="18"
+          name="cnpj"
+          onkeypress="formatarCampo(this)"
+        />
+        </div>
+        <br />
+        
+        <div>
+        <label for="dataLiberacao">Data Liberação </label>
+        <input type="input" id="dataLiberacao" name="dataLiberacao" onkeyup="formatarData(this)" />
+        </div>
+        <br />          
+
+        <div>
+
+        <label for="imgEmpresa">Imagem da empresa </label>
+        <input type="file" id="imgEmpresa" name="imgEmpresa" onchange="mostrarImgBase64()" />
+
+        </div>
+
+        <div id="imgTest"></div>
+
+        <div>
+          <label for="nomeImgEmpresa">Descricao da Imagem </label>
+          <input type="input" id="nomeImgEmpresa" name="nomeImgEmpresa" />
+        </div>
+        <br />
+
+        <!-- <div>
+        <label for="dataCadastro">Data cadastro</label>
+        <input
+          type="text"
+          id="dataCadastro"
+          maxlength="10"
+          name="dataCadastro"
+          onkeyup="formatarData(this)"
+        />
+        </div>
+        <br />
+        
+        <div>
+        <label for="dataAtualizacao">Data alteracao</label>
+        <input
+          type="text"
+          id="dataAtualizacao"
+          maxlength="10"
+          name="dataAtualizacao"
+          onkeyup="formatarData(this)"
+        />
+        </div> -->
+
+        <button
+          type="submit"
+          id="enviarForm"
+          class="buttonload"
+        >
+          Cadastrar Empresa
+        </button>
+        <div id="id01" class="modal">
+          <span
+            onclick="document.getElementById('id01').style.display='none'"
+            class="close"
+            title="Close Modal"
+            >&times;</span
+          >
+          <div class="modal-content">
+            <div class="container">
+              <h1>Confirmação de cadastro</h1>
+              <p>Deseja realmente fazer o cadastro de Empresa?</p>
+  
+              <div class="clearfix">
+                <button type="button" class="deletebtn" onclick="return document.getElementById('id01').style.display='none'">Cancelar</button>
+              </div>
+              <div class="clearfix">
+                <button type="button" class="confirmbtn" id="confirmar-cadastro" class="confirmbtn" onclick="postEmpresa()">Cadastrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <button onclick="redirecionarPaginaInicial()">Voltar</button>
+    </div>
+    <script src="./../../controllers/empresa/empresa-cadastro.js"></script>
+  </body>
+</html>

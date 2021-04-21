@@ -1,0 +1,180 @@
+{
+  "usuario": [
+    {
+      "id": 1,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "George Santos",
+      "cpf": "98745993983",
+      "email": "g.s@pnbm.com",
+      "sexo": "M",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 2,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Guilherme Henrique",
+      "cpf": "18742993385",
+      "email": "g.h@pnbm.com",
+      "sexo": "M",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 3,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Patricia Ferreira",
+      "cpf": "1872345723456",
+      "email": "p.f@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 4,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "João Ferraz Oliveira",
+      "cpf": "4872345723510",
+      "email": "jo.ol@pnbm.com",
+      "sexo": "M",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 5,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Luíz Alberto",
+      "cpf": "48723451133413",
+      "email": "a.l@pnbm.com",
+      "sexo": "M",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 6,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Andressa Albuquerque",
+      "cpf": "148723457234346",
+      "email": "a.a@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 7,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Márcio Raimundo Aragão",
+      "cpf": "1872345723456",
+      "email": "m.r@pnbm.com",
+      "sexo": "M",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 8,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Maria Luana Valentina Pires",
+      "cpf": "1872345723456",
+      "email": "m.l@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 9,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Patricia Ferreira",
+      "cpf": "1872345723456",
+      "email": "p.f@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 10,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "João Cauê Cardoso",
+      "cpf": "1872345723456",
+      "email": "j.c@pnbm.com",
+      "sexo": "M",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 11,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Gabriela Agatha da Paz",
+      "cpf": "232345723456",
+      "email": "g.ap@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 12,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Lara Catarina Eduarda Figueiredo",
+      "cpf": "4512345723456",
+      "email": "l.c@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 13,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Patricia Ferreira",
+      "cpf": "1872345723456",
+      "email": "p.f@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 14,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Julia Marina Ferreira",
+      "cpf": "1872345723456",
+      "email": "p.f@pnbm.com",
+      "sexo": "F",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "id": 15,
+      "idEmpresa": 3,
+      "nome_empresa": "Pernambucanas",
+      "nome_usuario": "Mateus Vitor Thomas Sales",
+      "cpf": "1872345723456",
+      "email": "ma.v@pnbm.com",
+      "sexo": "M",
+      "dataNasc": "1994-09-09T00:00:00"
+    },
+    {
+      "nome_usuario": "teste",
+      "cpf": "428.021.638-09",
+      "email": "alesoaresnetflix@gmail.com",
+      "sexo": "f",
+      "dataNas": "23/02/1995",
+      "id": 16
+    }
+  ],
+  "empresa": [
+    {
+      "id": 11,
+      "nome_empresa": "Pernambucanas",
+      "email": "g.s@pnbm.com",
+      "cnpj": "98745993983",
+      "data_cadastro": "1994-09-09T00:00:00",
+      "data_alteracao": "1994-09-09T00:00:00"
+    },
+    {
+      "nome_empresa": "987 enterprise",
+      "email": "alesoaresnetflix@gmail.com",
+      "cnpj": "12345678912",
+      "data_cadastro": "2020-07-18T19:01:57.637Z",
+      "data_alteracao": "2020-07-18T19:01:57.637Z",
+      "id": 12
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../estilo/global.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <title>Editar Empresa</title>
+  </head>
+  <body>
+    <div class="espaco-form">
+      <h4>
+        <strong>
+          Editar Empresa 
+        </strong>
+        </h4>
+      <form method="PUT" name="formEmpresa" onsubmit="return checkForm(this)">
+        <div>
+          <label> Selecione uma empresa </label>
+          <select id="selecionarEmpresa" onchange="carregarDepartamentoPorID(this.value)">
+          <!-- <option value=""></option> -->
+          <!-- <option id="idEmpresa" value=""></option> -->
+          </select>
+          </div>
+          <br />
+
+        <div id="lista-departamento" class="lista-departamento">
+        </div>
+<!-- <button id="cad-atualizado" type="submit">Atualizar Empresa</button> -->
+      </form>
+      <button onclick="redirecionarPaginaInicial()">Voltar</button> 
+    </div>
+    <script src="./../../controllers/departamento/departamento-editar-drop.js"></script>
+  </body>
+</html>

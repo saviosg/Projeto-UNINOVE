@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../estilo/global.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <title>Editar Empresa</title>
+  </head>
+  <body>
+    <div class="espaco-form">
+      <h4>
+        <strong>
+          Editar Empresa 
+        </strong>
+        </h4>
+      <form method="PUT" name="formUsuario" onsubmit="return checkForm(this)">
+        <div id="app" class="app">
+
+        </div>
+
+        <br />
+        
+        <div>
+          <label> Selecione sua empresa </label>
+          <select
+            id="selecionarEmpresa"
+            onchange="carregarEmpresaPorID(this.value)"
+          >
+            <!-- <option value=""></option> -->
+            <!-- <option id="idEmpresa" value=""></option> -->
+          </select>
+        </div>
+        <br />
+
+        <div>
+          <label> Selecione seu departamento </label>
+          <select
+            id="selecionarDepartamento"
+            onchange="carregarDepartamentoPorID(this.value)"
+          >
+            <!-- <option value=""></option> -->
+            <!-- <option id="idEmpresa" value=""></option> -->
+          </select>
+        </div>
+        <br />
+
+        <div>
+          <label for="nome_usuario">Nome Usuario: </label>
+          <input type="text" id="nome_usuario" />
+        </div>
+        <br />
+        <div>
+          <label for="cpf">CPF: </label>
+          <input type="text" id="cpf" maxlength="14" onkeyup="formatarCampo(this)"/>
+        </div>
+        <br />
+        <div>
+          <label for="email">E-mail</label>
+          <input type="text" id="email" />
+        </div>
+        <br />
+
+        <div>
+          <fieldset>
+            <legend> Usuario Ativo </legend>
+            <div>
+              <input type="checkbox" id="usuario" name="usuario_ativo" value="1">
+              <label for="usuario"> Sim </label>
+            </div>
+            <!-- <div>
+              <input type = "checkbox" id="usuario" name="usuario_ativo" value="0">
+              <label for="usuario"> Não </label>
+            </div> -->
+          </fieldset>
+        </div>
+
+        <div>
+          <p>Selecione seu Sexo:</p>
+            <input type="radio" id="Masculino" name="sexo" value="M">
+              <label for="Masculino">Masculino</label><br>
+            <input type="radio" id="Feminino" name="sexo" value="F">
+              <label for="Feminino">Feminino</label><br>
+        </div>
+        <br />
+        <div>
+          <label for="data_nas">Data Nascimento:</label>
+          <input type="text" id="data_nas" onkeyup="formatarData(this)"/>
+        </div>
+        <br />
+
+        <div>
+          <label for="imgEmpresa">ID da Imagem</label>
+          <input
+            type="text"
+            id="idImagemUsuario"
+            name="idImagemUsuario"
+            disabled
+          />
+        </div>
+
+        <div>
+          <label for="imgEmpresa">Imagem do usuário </label>
+          <input
+            type="file"
+            id="imgEmpresa"
+            name="imgEmpresa"
+            onchange="mostrarImgBase64()"
+          />
+        </div>
+
+        <div id="imgTest"></div>
+
+        <div>
+          <label for="nomeImgEmpresa">Descricao da Imagem </label>
+          <input type="input" id="nomeImgEmpresa" name="nomeImgEmpresa" />
+        </div>
+        <br />
+
+        <button type="submit" id="enviarForm" class="cadastrar_usuario">Editar Usuario</button>
+
+        <div id="id01" class="modal">
+          <span
+            onclick="document.getElementById('id01').style.display='none'"
+            class="close"
+            title="Close Modal"
+            >&times;</span
+          >
+          <div class="modal-content">
+            <div class="container">
+              <h1>Confirmação de edição</h1>
+              <p>Deseja realmente editar o Usuario?</p>
+  
+              <div class="clearfix">
+                <button type="button" class="deletebtn" onclick="return document.getElementById('id01').style.display='none'">Cancelar</button>
+              </div>
+              <div class="clearfix">
+                <button type="button" class="confirmbtn" id="confirmar-cadastro" class="confirmbtn" onclick="putUsuario()">Cadastrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <button onclick="redirecionarPaginaInicial()">Voltar</button>
+    </div>
+    <script src="./../../controllers/usuario/usuario-editar.js"></script>
+  </body>
+</html>
