@@ -8,7 +8,6 @@ let dadosDepartamentoID = "";
 
 let listaIdsCategoria = [];
 
-const urlAPI = "https://localhost:44318/empresa";
 
 // METODO POST
 
@@ -28,7 +27,7 @@ async function postDepartamento() {
   mostrarValorCategorias();
   console.log(listaIdsCategoria, "Chamando array dentro do post");
 
-  const atualizarEmpresa = await fetch("https://localhost:44318/departamento", {
+  const atualizarEmpresa = await fetch(urlAPI + "/departamento", {
     method: "POST",
     body: JSON.stringify({
       idEmpresa: idEmpresaFormatado,
@@ -73,12 +72,12 @@ const exibirNomeCategoriasDepartamentos = (catDepartamento) => {
 };
 
 function requestCategoriasDepartamento() {
-  fetch("https://localhost:44318/categorias")
+  fetch(urlAPI + "/categorias")
     .then((s) => s.json())
     .then((dados) => exibirNomeCategoriasDepartamentos(dados));
 }
 
-fetch(urlAPI)
+fetch(urlAPI + "/departamento")
   .then((s) => s.json())
   .then((dados) => exibirNomeEmpresas(dados));
 
@@ -157,14 +156,14 @@ function validarForm() {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaInicia() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaListaDepartamento() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/departamento/lista-departamento.html";
+    urlSITE + "/Projeto.Web/pages/departamento/lista-departamento.html";
 }

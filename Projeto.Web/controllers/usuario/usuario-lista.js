@@ -5,7 +5,6 @@ const botaoAtualizar = document.getElementById(".cad-atualizado");
 const formAtualizar = document.getElementById("atualiza-empresa");
 const enviarForms = document.getElementById("enviarForm");
 
-const urlAPI = "https://localhost:44318/usuario";
 let dadosUsuarios = "";
 
 const exibirUsuarios = (u) => {
@@ -34,7 +33,7 @@ const exibirUsuarios = (u) => {
 
 // METODO GET
 
-fetch(urlAPI)
+fetch(urlAPI + "/usuario")
   .then((s) => s.json())
   .then((dados) => exibirUsuarios(dados));
 
@@ -49,7 +48,7 @@ function editarItem(usuarioId, empresaId) {
 
 // DELETE
 async function removeItem(usuarioId) {
-  var url = "https://localhost:44318/usuario/" + usuarioId;
+  var url = urlAPI + "/usuario/" + usuarioId;
   console.log(url);
   const usuario = await fetch(url, {
     method: "DELETE",
@@ -80,12 +79,12 @@ function mascaraData(data) {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaLista() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/empresa/lista-empresa.html";
+    urlSITE + "/Projeto.Web/pages/empresa/lista-empresa.html";
 }
 
 function abrirModalConfirmado() {

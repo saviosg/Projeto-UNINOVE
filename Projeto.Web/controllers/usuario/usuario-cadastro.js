@@ -13,7 +13,6 @@ const dataNasc = document.getElementById("data_nas");
 const descricaoImg = document.getElementById("nomeImgEmpresa");
 const imgEmpresa = document.getElementById("imgEmpresa");
 
-const urlAPI = "https://localhost:44318/usuario";
 // let dadosUsuario = '';
 
 const exibirEmpresas = (empresas) => {
@@ -28,7 +27,7 @@ const exibirEmpresas = (empresas) => {
 function carregarEmpresaPorID(valor) {
   localStorage.setItem("idEmpresaLS", valor);
 
-  fetch("https://localhost:44318/departamento/empresa/" + valor)
+  fetch(urlAPI + "/departamento/empresa/" + valor)
     .then((s) => s.json())
     .then((dados) => exibirNomeDepartamentos(dados));
 }
@@ -51,7 +50,7 @@ async function postUsuario() {
   
   let sexo = document.querySelector('input[name="sexo"]:checked').value;
 
-    const atualizarUsuario = await fetch("https://localhost:44318/usuario", {
+    const atualizarUsuario = await fetch(urlAPI + "/usuario", {
       method: "POST",
       body: JSON.stringify({
         idEmpresa: idEmpresa,
@@ -93,7 +92,7 @@ const exibirNomeDepartamentos = (Departamentos) => {
   document.getElementById("selecionarDepartamento").innerHTML = options;
 };
 
-fetch("https://localhost:44318/empresa")
+fetch(urlAPI + "/empresa")
   .then((s) => s.json())
   .then((dados) => exibirEmpresas(dados));
 
@@ -246,10 +245,10 @@ function mostrarImgBase64() {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaLista() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/usuario/lista-usuario.html";
+    urlSITE + "/Projeto.Web/pages/usuario/lista-usuario.html";
 }

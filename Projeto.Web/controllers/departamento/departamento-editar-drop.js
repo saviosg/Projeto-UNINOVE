@@ -5,9 +5,8 @@ const editarDepartamento = document.querySelector(".editar-departamento");
 let dadosDepartamento = "";
 let dadosDepartamentoID = "";
 
-var urlAPI = "https://localhost:44318/departamento";
 
-fetch("https://localhost:44318/departamento")
+fetch(urlAPI + "/departamento")
   .then((s) => s.json())
   .then((dados) => exibirNomeEmpresas(dados));
 
@@ -22,9 +21,8 @@ const exibirNomeEmpresas = (empresas) => {
 
 function carregarDepartamentoPorID(valor) {
   localStorage.setItem("idDepartamento", valor);
-  const urlAPI = "https://localhost:44318/departamento/" + valor;
 
-  fetch(urlAPI)
+  fetch(urlAPI + "/departamento/" + valor)
     .then((s) => s.json())
     .then((dados) => exibirDepartamentosID(dados));
 }
@@ -107,7 +105,7 @@ async function putDepartamento() {
   var idEmpresa = JSON.parse(idEmpresaLS);
   window.localStorage.removeItem("idEmpresa");
 
-  console.log("https://localhost:44318/departamento/" + idDepartamento);
+  console.log(urlAPI + "/departamento/" + idDepartamento);
   try {
     const atualizarDepartamento = await fetch(urlAPI + "/" + idDepartamento, {
       method: "PUT",
@@ -132,10 +130,10 @@ async function putDepartamento() {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaListaDepartamento() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/departamento/lista-departamento.html";
+    urlSITE + "/Projeto.Web/pages/departamento/lista-departamento.html";
 }

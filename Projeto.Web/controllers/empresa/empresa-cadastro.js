@@ -13,7 +13,6 @@ const cnpj = document.getElementById("cnpj");
 const dataLiberacao = document.getElementById("dataLiberacao");
 const descricaoImg = document.getElementById("nomeImgEmpresa");
 const imgEmpresa = document.getElementById("imgEmpresa");
-const urlAPI = "https://localhost:44318/empresa";
 
 // METODO POST
 
@@ -23,7 +22,7 @@ async function postEmpresa() {
   let valorFormatado = formatandoValor[1];
 
   const atualizarEmpresa = await fetch(
-    "https://localhost:44318/empresa/",
+    urlAPI + "/empresa/",
     {
       method: "POST",
       body: JSON.stringify({
@@ -219,14 +218,14 @@ function mostrarImgBase64() {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaInicia() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaLista() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/empresa/lista-empresa.html";
+    urlSITE + "/Projeto.Web/pages/empresa/lista-empresa.html";
 }

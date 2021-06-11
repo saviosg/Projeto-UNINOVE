@@ -22,7 +22,7 @@ function queryString(parameter) {
 }
 
 var variavel = queryString("idEmpresa");
-const urlAPI = "https://localhost:44318/empresa/" + variavel;
+const urlAPIidEmpresa = urlAPI + "/empresa/" + variavel;
 console.log(variavel);
 
 const exibirEmpresa = (u) => {
@@ -153,7 +153,7 @@ const exibirEmpresa = (u) => {
   // document.getElementById('imgTest').innerHTML = image;
 };
 
-fetch(urlAPI)
+fetch(urlAPIidEmpresa)
   .then((s) => s.json())
   .then((dados) => exibirEmpresa(dados));
 
@@ -178,7 +178,7 @@ async function putEmpresa() {
   let valorFormatado = formatandoValor[1];
 
   try {
-    const atualizarEmpresa = await fetch(urlAPI, {
+    const atualizarEmpresa = await fetch(urlAPIidEmpresa, {
       method: "PUT",
       body: JSON.stringify({
         nomeEmpresa: nomeEmpresa.value,
@@ -354,10 +354,10 @@ function mostrarImgBase64() {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaLista() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/empresa/lista-empresa.html";
+    urlSITE + "/Projeto.Web/pages/empresa/lista-empresa.html";
 }

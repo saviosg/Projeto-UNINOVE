@@ -36,7 +36,7 @@ function queryString(parameter) {
 }
 
 var idUsuario = queryString("idUsuario");
-var urlAPI = "https://localhost:44318/usuario/" + idUsuario;
+const urlAPIidUsuario = urlAPI + "/usuario/" + idUsuario;
 
 const exibirUsuario = (usuario) => {
   nomeUsuario.value = `${usuario.nome_usuario}`;
@@ -103,7 +103,7 @@ const requestDepartamentos = async () => {
   var idEmpresaLS = window.localStorage.getItem("IdEmpresaUs");
   var idEmpresa = JSON.parse(idEmpresaLS);
 
-  fetch("https://localhost:44318/departamento/empresa/" + idEmpresa)
+  fetch(urlAPI + "/departamento/empresa/" + idEmpresa)
   .then((s) => s.json())
   .then((dados) => exibirNomeDepartamentos(dados));
 }
@@ -125,7 +125,7 @@ const exibirEmpresas = (empresas) => {
 }
 
 const requestEmpresas = async () => {
-  fetch("https://localhost:44318/empresa")
+  fetch(urlAPI + "/empresa")
   .then((s) => s.json())
   .then((dados) => exibirEmpresas(dados));
 }
@@ -133,12 +133,12 @@ const requestEmpresas = async () => {
 function carregarEmpresaPorID(valor) {
   localStorage.setItem("idEmpresaLS", valor);
 
-  fetch("https://localhost:44318/departamento/empresa/" + valor)
+  fetch(urlAPI + "/departamento/empresa/" + valor)
     .then((s) => s.json())
     .then((dados) => exibirNomeDepartamentos(dados));
 }
 
-fetch(urlAPI)
+fetch(urlAPIidUsuario)
   .then((s) => s.json())
   .then(requestEmpresas())
   .then(requestDepartamentos())
@@ -169,7 +169,7 @@ async function putUsuario() {
 
   let sexo = document.querySelector('input[name="sexo"]:checked').value;  
 
-    const atualizarUsuario = await fetch("https://localhost:44318/usuario/" + idUsuario, {
+    const atualizarUsuario = await fetch(urlAPI + "/usuario/" + idUsuario, {
       method: "PUT",
       body: JSON.stringify({
         idEmpresa: idEmpresa,
@@ -365,10 +365,10 @@ function mostrarImgBase64() {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaLista() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/usuario/lista-usuario.html";
+    urlSITE + "/Projeto.Web/pages/usuario/lista-usuario.html";
 }

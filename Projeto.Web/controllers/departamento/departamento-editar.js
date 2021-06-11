@@ -23,7 +23,7 @@ function queryString(parameter) {
 }
 
 var idDepartamento = queryString("idDepartamento");
-const urlAPI = "https://localhost:44318/departamento/" + idDepartamento;
+const urlAPIDepartamento = urlAPI + "/" + idDepartamento;
 
 const exibirCategoriasDepartamentosPorID = (catDepartamentoID) => {
   debugger;
@@ -50,7 +50,7 @@ const exibirCategoriasDepartamentosPorID = (catDepartamentoID) => {
 
 const requestCategoriasDepartamento = async () => {
   fetch(
-    "https://localhost:44318/departamento/categoriadepartamento/" +
+    urlAPI + "/departamento/categoriadepartamento/" +
       idDepartamento
   )
     .then((s) => s.json())
@@ -69,7 +69,7 @@ const exibirNomeCategoriasDepartamentos = (catDepartamento) => {
 };
 
 const requestCategorias = async () => {
-  fetch("https://localhost:44318/categorias")
+  fetch(urlAPI + "/categorias")
     .then((s) => s.json())
     .then((dados) => exibirNomeCategoriasDepartamentos(dados));
 };
@@ -84,7 +84,7 @@ const exibirDepartamentos = (departamento) => {
 };
 
 const requestDepartamentos = async () => {
-  fetch(urlAPI)
+  fetch(urlAPIDepartamento)
     .then((s) => s.json())
     .then((dados) => exibirDepartamentos(dados));
 };
@@ -108,12 +108,12 @@ const exibirEmpresas = (empresas) => {
 };
 
 const requestEmpresas = async () => {
-  fetch("https://localhost:44318/empresa")
+  fetch(urlAPI + "/empresa")
     .then((s) => s.json())
     .then((dados) => exibirEmpresas(dados));
 };
 
-fetch(urlAPI)
+fetch(urlAPIDepartamento)
   .then(requestEmpresas())
   .then(requestDepartamentos())
   .then(requestCategorias())
@@ -133,7 +133,7 @@ async function putDepartamento() {
   console.log(listaIdsCategoria, "Chamando array dentro do post");
 
   try {
-    const atualizarDepartamento = await fetch(urlAPI, {
+    const atualizarDepartamento = await fetch(urlAPIDepartamento, {
       method: "PUT",
       body: JSON.stringify({
         idEmpresa: idEmpresa,
@@ -200,10 +200,10 @@ function mostrarValorCategorias() {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaLista() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/departamento/lista-departamento.html";
+    urlSITE + "/Projeto.Web/pages/departamento/lista-departamento.html";
 }

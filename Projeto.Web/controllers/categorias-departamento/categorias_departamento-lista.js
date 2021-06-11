@@ -11,7 +11,6 @@ const email = document.getElementById("email");
 const cnpj = document.getElementById("cnpj");
 const dataCadastro = document.getElementById("dataCadastro");
 const dataAtualizacao = document.getElementById("dataAtualizacao");
-const urlAPI = "https://localhost:44318/categoriasdepartamento";
 let dadosEmpresa = "";
 
 const exibirDepartamentos = (u) => {
@@ -39,7 +38,7 @@ const exibirDepartamentos = (u) => {
 
 // METODO GET
 
-fetch(urlAPI)
+fetch(urlAPI + "/categoriasdepartamento")
   .then((s) => s.json())
   .then((dados) => exibirDepartamentos(dados));
 
@@ -54,7 +53,7 @@ function editarItem(departamentoId, empresaId) {
 
 // DELETE
 async function removeItem(departamentoId) {
-  var url = "https://localhost:44318/departamento/" + departamentoId;
+  var url = urlAPI + "/departamento/" + departamentoId;
   console.log(url);
   const empresa = await fetch(url, {
     method: "DELETE",
@@ -65,16 +64,16 @@ async function removeItem(departamentoId) {
 }
 
 function redirecionarPaginaInicial() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaInicia() {
-  location.href = "http://127.0.0.1:5500/index.html";
+  location.href = urlSITE + "/index.html";
 }
 
 function redirecionarPaginaLista() {
   location.href =
-    "http://127.0.0.1:5500/Projeto.Web/pages/empresa/lista-empresa.html";
+    urlSITE + "/Projeto.Web/pages/empresa/lista-empresa.html";
 }
 
 function abrirModalConfirmado() {
