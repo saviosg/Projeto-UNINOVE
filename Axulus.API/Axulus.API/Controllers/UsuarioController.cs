@@ -1,5 +1,5 @@
 ﻿using Axulus.Data.Model;
-using Axulus.Data.Repositorio;
+using Axulus.Data.Repositorio.Sqlite;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

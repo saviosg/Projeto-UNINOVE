@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Axulus.Data.Repositorio;
+using Axulus.Data.Repositorio.Sqlite;
 using Axulus.Data.Model;
 
 namespace Axulus.API.Controllers

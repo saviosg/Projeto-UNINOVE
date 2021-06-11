@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Axulus.Model;
-using Axulus.Data.Repositorio;
+using Axulus.Data.Repositorio.Sqlite;
 using Microsoft.AspNetCore.Cors;
 
 namespace Axulus.API.Controllers
