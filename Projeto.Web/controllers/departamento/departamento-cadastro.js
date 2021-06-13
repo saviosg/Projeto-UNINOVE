@@ -12,29 +12,16 @@ let listaIdsCategoria = [];
 // METODO POST
 
 async function postDepartamento() {
-  debugger;
+  //debugger;
   let idEmpresa = document.getElementById("selectNumber").value;
   let idEmpresaFormatado = parseInt(idEmpresa);
 
-  let idCategoria = document.querySelector(
-    'input[name="idCategoriasDepartamento"]:checked'
-  ).value;
-  let idCategoriaFormatado = JSON.parse(idCategoria);
-
-  console.log(idCategoria);
-  console.log(idCategoriaFormatado);
-
-  mostrarValorCategorias();
-  console.log(listaIdsCategoria, "Chamando array dentro do post");
 
   const atualizarEmpresa = await fetch(urlAPI + "/departamento", {
     method: "POST",
     body: JSON.stringify({
       idEmpresa: idEmpresaFormatado,
       nomeDepartamento: NomeDep.value,
-      categorias: 
-        listaIdsCategoria
-      ,
     }),
     headers: {
       "Content-Type": "application/json; charset=UTF-8",
@@ -43,8 +30,8 @@ async function postDepartamento() {
     const postListaEmpresa = [];
     postListaEmpresa.push(data);
     console.log(postListaEmpresa);
-    // location.reload();
-    // redirecionarPaginaListaDepartamento();
+    //location.reload();
+    redirecionarPaginaListaDepartamento();
   });
 }
 
@@ -77,7 +64,7 @@ function requestCategoriasDepartamento() {
     .then((dados) => exibirNomeCategoriasDepartamentos(dados));
 }
 
-fetch(urlAPI + "/departamento")
+fetch(urlAPI + "/empresa")
   .then((s) => s.json())
   .then((dados) => exibirNomeEmpresas(dados));
 

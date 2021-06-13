@@ -33,7 +33,6 @@ function carregarEmpresaPorID(valor) {
 }
 
 async function postUsuario() {
-  debugger;
   formatandoDataPost();
   formatandoCPF();
   mostrarImgBase64();

@@ -100,7 +100,7 @@ function editarItem(empresaId) {
   
   localStorage.setItem('idEmpresa', empresaId);
 
-  window.location = "editar-empresa.html?idEmpresa="+ empresaId;
+  window.location = "editar-empresa?idEmpresa=" + empresaId;
 
   // window.href =
   // urlSITE + "/Projeto.Web/pages/empresa/editar-empresa.html";
@@ -108,13 +108,14 @@ function editarItem(empresaId) {
 
 // DELETE
 async function removeItem(empresaId) {
-  var url = urlAPI + empresaId;
+  var url = urlAPI + "/empresa/" + empresaId;
   const empresa = await fetch(url, {
     method: "DELETE",
   })
-    .then((response) => response.json())
-    .then((json) => console.log(json))
-    .then(location.reload());
+    .then((response) => {
+      console.log(response.json());
+      location.reload();
+    });
 }
 
 // function formatarImgBase64() {

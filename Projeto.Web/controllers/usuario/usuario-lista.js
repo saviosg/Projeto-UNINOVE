@@ -43,7 +43,7 @@ function editarItem(usuarioId, empresaId) {
   localStorage.setItem('IdEmpresaUs', empresaId);
   // localStorage.setItem('Idusuario', usuarioId);
 
-  window.location = "editar-usuario.html?idUsuario="+ usuarioId;
+  window.location = "editar-usuario?idUsuario="+ usuarioId;
 }
 
 // DELETE
@@ -53,8 +53,7 @@ async function removeItem(usuarioId) {
   const usuario = await fetch(url, {
     method: "DELETE",
   })
-    .then((response) => response.json())
-    .then(location.reload());
+    .then(() => {location.reload();});
 }
 
 function mascaraCpf(valor) {

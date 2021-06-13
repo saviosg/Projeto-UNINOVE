@@ -145,7 +145,6 @@ fetch(urlAPIidUsuario)
   .then((dados) => exibirUsuario(dados));
 
 async function putUsuario() {
-  debugger;
   formatandoDataPost();
   formatandoCPF();
   mostrarImgBase64();

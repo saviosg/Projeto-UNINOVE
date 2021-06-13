@@ -56,9 +56,9 @@ async function removeItem(departamentoId) {
   const empresa = await fetch(url, {
     method: "DELETE",
   })
-    .then((response) => response.json())
-    .then((json) => console.log(json))
-    .then(location.reload());
+//    .then((response) => response.json())
+//    .then((json) => console.log(json))
+    .then(() => {location.reload();});
 }
 
 function redirecionarPaginaInicial() {

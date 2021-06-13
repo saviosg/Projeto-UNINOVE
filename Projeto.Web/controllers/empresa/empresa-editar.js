@@ -65,7 +65,7 @@ const exibirEmpresa = (u) => {
   <div>
 
   <label for="imgEmpresa">Imagem da empresa </label>
-  <input type="file" id="imgEmpresa" name="imgEmpresa" onload="mostrarImgBase64()" value=${u.image.imageData} />
+  <input type="file" id="imgEmpresa" name="imgEmpresa" onload="mostrarImgBase64()" value="${u.image.imageData}" />
 
   </div>
 
@@ -73,7 +73,7 @@ const exibirEmpresa = (u) => {
 
   <div>
     <label for="nomeImgEmpresa">Descricao da Imagem </label>
-    <input type="input" id="nomeImgEmpresa" name="nomeImgEmpresa" value=${u.image.descricao} />
+    <input type="input" id="nomeImgEmpresa" name="nomeImgEmpresa" value="${u.image.descricao}" />
   </div>
   <br />
 
@@ -86,8 +86,6 @@ const exibirEmpresa = (u) => {
         Editar Empresa
       </button>
   <form>
-
-      <button onclick="redirecionarPaginaLista()" id="voltarPaginaLista">Voltar</button>
 
       <div id="id01" class="modal">
       <span
@@ -173,9 +171,26 @@ fetch(urlAPIidEmpresa)
 async function putEmpresa() {
   event.preventDefault();
   this.checkForm();
-  let pegandoValor = document.getElementById("imgTest").innerHTML;
-  let formatandoValor = pegandoValor.split('"');
-  let valorFormatado = formatandoValor[1];
+  
+  let dados;
+  let elemento = document.getElementById("imgEmpresa");
+
+  if (!elemento.value) {
+    let pegandoValor =  document.getElementById("imgTest").innerHTML;
+    let formatandoValor = pegandoValor.split('"');
+    dados = formatandoValor[1];
+  }
+  else {
+    dados = elemento.files[0];
+    let reader = new FileReader();
+    dados = new Promise((resolve) => {
+      reader.addEventListener("load", () => {
+        resolve(reader.result);
+      });
+      reader.readAsDataURL(dados);
+    });
+    dados = await dados;
+  }
 
   try {
     const atualizarEmpresa = await fetch(urlAPIidEmpresa, {
@@ -187,7 +202,7 @@ async function putEmpresa() {
         dataLiberacao: dataLiberacao.value,
         image: {
           descricao: nomeImgEmpresa.value,
-          imageData: valorFormatado,
+          imageData: dados,
         },
       }),
       headers: {
@@ -290,12 +305,6 @@ function validarForm() {
     return false;
   }
 
-  if (imgEmpresa.value == "") {
-    alert("Formulário inválido. Preencha o campo com a imagem!");
-    imgEmpresa.focus();
-    return false;
-  }
-
   if (nomeImgEmpresa.value == "") {
     alert("Formulário inválido. Preencha o campo com a Data atualizacão!");
     nomeImgEmpresa.focus();
@@ -307,7 +316,6 @@ function validarForm() {
     email.value != null &&
     cnpj.value != null &&
     dataLiberacao.value != null &&
-    imgEmpresa.value != null &&
     nomeImgEmpresa.value != null
   ) {
     enviarForms.disabled = true;

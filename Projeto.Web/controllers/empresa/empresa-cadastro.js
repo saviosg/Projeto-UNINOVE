@@ -114,7 +114,7 @@ function mascaraCnpj(valor) {
 function checkForm(empresaForm) {
   event.preventDefault()
   validarForm();
-  formatandoDataPost();
+  // formatandoDataPost(); FIXME
   formatandoCNPJ();
   mostrarImgBase64();
 }
