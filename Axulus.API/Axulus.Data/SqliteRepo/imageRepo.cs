@@ -13,32 +13,30 @@ namespace Axulus.Data.Repositorio.Sqlite
         #endregion
 
         #region Metodos Publicos
-        public async Task<ImageModel> AdicionarImageAsync(ImageModel image, int idEmpresa)
-        {
-            using (SqliteConnection con = new SqliteConnection(connectionString))
-            {
-                string comandoSQL = @"insert into image (id_empresa, descricao, image_base64, data_cadastro, data_alteracao)
-                    values (
-                      @idEmpresa, 
-                      @descricao, 
-                      @imageBase64, 
-                      @dataCadastro, 
-                      @dataAtualizacao
-                    )";
+        public async Task<ImageModel> AdicionarImageAsync(ImageModel image, SqliteConnection con, SqliteTransaction transaction)
+        { 
+            string comandoSQL = @"insert into image (descricao, image_base64, data_cadastro, data_alteracao)
+                values (
+                  @descricao, 
+                  @imageBase64, 
+                  @dataCadastro, 
+                  @dataAtualizacao
+                );
+                select last_insert_rowid();";
 
-                SqliteCommand cmd = new SqliteCommand(comandoSQL, con);
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("@idEmpresa", idEmpresa);
-                cmd.Parameters.AddWithValue("@descricao", image.descricao);
-                cmd.Parameters.AddWithValue("@imageBase64", image.imageData);
-                cmd.Parameters.AddWithValue("@dataCadastro", DateTime.Now);
-                cmd.Parameters.AddWithValue("@dataAtualizacao", DateTime.Now);
+            SqliteCommand cmd = new SqliteCommand(comandoSQL, con);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@descricao", image.descricao);
+            cmd.Parameters.AddWithValue("@imageBase64", image.imageData);
+            cmd.Parameters.AddWithValue("@dataCadastro", DateTime.Now);
+            cmd.Parameters.AddWithValue("@dataAtualizacao", DateTime.Now);
 
-                await con.OpenAsync();
-                await cmd.ExecuteNonQueryAsync();
-                await con.CloseAsync();
-                return image;
-            }
+            //await con.OpenAsync();
+            cmd.Transaction = transaction;
+            var idImage = await cmd.ExecuteScalarAsync();
+            image.idImage = Convert.ToInt32(idImage);
+            //await con.CloseAsync();
+            return image;
             #endregion
         }
 

@@ -44,6 +44,7 @@ namespace Axulus.Data.Repositorio.Sqlite
 
                 transaction.Commit(); //FIXME
 
+                /*
                 foreach (int categoria in departamento.categorias)
                 {
                     var categoriaDepModel = new CategoriasDepartamentoModel() { idCategoria = categoria, idDepartamento = Convert.ToInt32(idDepartamento)};
@@ -51,6 +52,7 @@ namespace Axulus.Data.Repositorio.Sqlite
                 }
 
                 departamentoM.idDepartamento = Convert.ToInt32(idDepartamento);
+                */
 
                 return departamento;
             }

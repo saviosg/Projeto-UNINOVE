@@ -17,16 +17,13 @@ namespace Axulus.Data.Repositorio.Sqlite
             var retorno = new List<UsuarioModel>();
             using (SqliteConnection con = new SqliteConnection(connectionString))
             {
-                string comandoSQL = @"select U.id_usuario, U.id_empresa, U.nome_usuario, U.cpf,
-                        U.email, U.sexo, U.data_nas, U.id_departamento, U.id_image, E.nome_empresa,
-                        D.nome_departamento, I.image_base64, I.descricao
-                        from usuario as U
+                string comandoSQL = @"select id_usuario, usuario.id_empresa, nome_usuario, cpf,
+                        usuario.email, sexo, date(data_nas) as data_nas, usuario.id_departamento, E.nome_empresa, D.nome_departamento
+                        from usuario
                           join empresa as E
-                            on U.id_empresa = E.id_empresa
+                            on usuario.id_empresa = E.id_empresa
                           join departamento as D
-                            on U.id_departamento = D.id_departamento
-                          join image as I
-                            on U.id_image = I.id_image";
+                            on usuario.id_departamento = D.id_departamento";
 
                 SqliteCommand cmd = new SqliteCommand(comandoSQL, con);
                 cmd.CommandType = CommandType.Text;
@@ -43,7 +40,7 @@ namespace Axulus.Data.Repositorio.Sqlite
                         usuario.idUsuario = Convert.ToInt32(reader["id_usuario"]);
                         usuario.idEmpresa = Convert.ToInt32(reader["id_empresa"]);
                         usuario.idDepartamento = Convert.ToInt32(reader["id_departamento"]);
-                        usuario.idImagem = Convert.ToInt32(reader["id_image"]);
+                        //usuario.idImagem = Convert.ToInt32(reader["id_image"]);
                         usuario.nome_usuario = reader.GetString("nome_usuario");
                         usuario.cpf = reader.GetString("cpf");
                         usuario.email = reader.GetString("email");
@@ -51,9 +48,9 @@ namespace Axulus.Data.Repositorio.Sqlite
                         usuario.dataNasc = Convert.ToDateTime(reader["data_nas"]);
                         usuario.nomeEmpresa = reader.GetString("nome_empresa");
                         usuario.nomeDepartamento = reader.GetString("nome_departamento");
-                        image.descricao = reader.GetString("descricao");
-                        image.imageData = reader.GetString("image_base64");
-                        usuario.image = image;
+                        //image.descricao = reader.GetString("descricao");
+                        //image.imageData = reader.GetString("image_base64");
+                        //usuario.image = image;
                         retorno.Add(usuario);
 
                     }
@@ -67,16 +64,16 @@ namespace Axulus.Data.Repositorio.Sqlite
             var imageRepo = new imageRepo();
             var catDepartamentoRepo = new CategoriasDepartamentoRepo();
             using SqliteConnection con = new SqliteConnection(connectionString);
-                string comandoSQL = @"insert into usuario (id_empresa, id_departamento, nome_usuario, cpf, email, sexo, data_nas, id_image, us_ativo)
+                string comandoSQL = @"insert into usuario (id_empresa, id_departamento, id_image, nome_usuario, cpf, email, sexo, data_nas, us_ativo)
                     values (
                       @idEmpresa, 
-                      @idDepartamento, 
+                      @idDepartamento,
+                      @idImage,
                       @nomeUsuario, 
                       @cpf, 
                       @email, 
                       @sexo, 
-                      @dataNasc, 
-                      @idImage, 
+                      @dataNasc,
                       @usAtivo
                     );
                     select last_insert_rowid();";
@@ -84,7 +81,7 @@ namespace Axulus.Data.Repositorio.Sqlite
                 var transaction = con.BeginTransaction();
                 try
                 {
-                    var idImage = await imageRepo.AdicionarImageUsuarioAsync(usuario.image);
+                    var image = await imageRepo.AdicionarImageAsync(usuario.image, con, transaction); 
 
                     SqliteCommand cmd = new SqliteCommand(comandoSQL, con)
                     {
@@ -92,13 +89,14 @@ namespace Axulus.Data.Repositorio.Sqlite
                     };
                     cmd.Parameters.AddWithValue("@idEmpresa", usuario.idEmpresa);
                     cmd.Parameters.AddWithValue("@idDepartamento", usuario.idDepartamento);
+                    cmd.Parameters.AddWithValue("@idImage", image.idImage);
                     cmd.Parameters.AddWithValue("@nomeUsuario", usuario.nome_usuario);
                     cmd.Parameters.AddWithValue("@cpf", usuario.cpf);
                     cmd.Parameters.AddWithValue("@email", usuario.email);
                     cmd.Parameters.AddWithValue("@sexo", usuario.sexo);
                     cmd.Parameters.AddWithValue("@dataNasc", usuario.dataNasc);
                     cmd.Parameters.AddWithValue("@usAtivo", Convert.ToBoolean(usuario.usuarioAtivo));
-                    cmd.Parameters.AddWithValue("@idImage", idImage);
+                    //cmd.Parameters.AddWithValue("@idImage", idImage);
 
                     cmd.Transaction = transaction;
                     var idUsuario = await cmd.ExecuteScalarAsync();
@@ -107,7 +105,7 @@ namespace Axulus.Data.Repositorio.Sqlite
                     transaction.Commit();
                     usuario.idUsuario = Convert.ToInt32(idUsuario);
                     //usuario.usuarioAtivo = Convert.ToBoolean(usuarioAtivo);
-                    usuario.idImagem = Convert.ToInt32(idImage);
+                    //usuario.idImagem = Convert.ToInt32(idImage);
                     return usuario;
                 }
                 catch (Exception ex)
@@ -137,14 +135,16 @@ namespace Axulus.Data.Repositorio.Sqlite
                       email = @email,
                       sexo = @sexo,
                       data_nas = @dataNasc,
-                      id_image = @idImage,
                       us_ativo = @usAtivo
                     where id_usuario = @idUsuario;
                     update image
                     set
                       descricao = @descricao,
                       image_base64 = @imageData
-                    where id_image = @idImage;";
+                    where id_image = (
+                        select id_image from usuario
+                        where id_usuario = @idUsuario
+                    );";
 
                 SqliteCommand cmd = new SqliteCommand(comandoSQL, con);
                 cmd.CommandType = CommandType.Text;
@@ -156,7 +156,6 @@ namespace Axulus.Data.Repositorio.Sqlite
                 cmd.Parameters.AddWithValue("@email", usuario.email);
                 cmd.Parameters.AddWithValue("@sexo", usuario.sexo);
                 cmd.Parameters.AddWithValue("@dataNasc", usuario.dataNasc);
-                cmd.Parameters.AddWithValue("@idImage", usuario.idImagem);
                 cmd.Parameters.AddWithValue("@usAtivo", Convert.ToBoolean(usuario.usuarioAtivo));
                 cmd.Parameters.AddWithValue("@descricao", usuario.image.descricao);
                 cmd.Parameters.AddWithValue("@imageData", usuario.image.imageData);
@@ -172,15 +171,18 @@ namespace Axulus.Data.Repositorio.Sqlite
             var usuario = new UsuarioModel();
             using (SqliteConnection con = new SqliteConnection(connectionString))
             {
-                string comandoSQL = @"delete from usuario
-                    where id_usuario = @idUsuario;
+                string comandoSQL = @"
                     delete from image
-                    where id_image = @idImage;";
+                    where id_image = (
+                        select id_image from usuario
+                        where id_usuario = @idUsuario
+                    );
+                    delete from usuario
+                    where id_usuario = @idUsuario;";
 
                 SqliteCommand cmd = new SqliteCommand(comandoSQL, con);
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.AddWithValue("@idUsuario", id);
-                cmd.Parameters.AddWithValue("@idImage", usuario.idImagem);
 
                 await con.OpenAsync();
                 await cmd.ExecuteNonQueryAsync ();
