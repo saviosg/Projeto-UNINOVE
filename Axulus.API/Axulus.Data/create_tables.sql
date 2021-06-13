@@ -3,8 +3,8 @@ create table if not exists categoria_departamento
 	id_categoria_departamento integer primary key,
 	id_categoria integer,
 	id_departamento integer,
-	foreign key(id_categoria) references categoria(id_categoria),
-	foreign key(id_departamento) references departamento(id_departamento)
+	foreign key(id_categoria) references categorias(id_categoria) on delete cascade,
+	foreign key(id_departamento) references departamento(id_departamento) on delete cascade
 );
 
 create table if not exists categorias
@@ -18,29 +18,31 @@ create table if not exists departamento
 	id_departamento integer primary key,
 	id_empresa integer,
 	nome_departamento text,
-	foreign key(id_empresa) references empresa(id_empresa)
+	foreign key(id_empresa) references empresa(id_empresa) on delete cascade
 );
 
 create table if not exists empresa
 (
 	id_empresa integer primary key,
+	id_image integer,
 	nome_empresa text,
 	email text,
 	cnpj text,
 	data_liberacao integer,
 	data_cadastro integer,
-	data_alteracao integer
+	data_alteracao integer,
+	foreign key(id_image) references image(id_image) on delete set null
 );
 
 create table if not exists image
 (
 	id_image integer primary key,
-	id_empresa integer,
+--	id_empresa integer,
 	descricao text,
 	image_base64 text,
 	data_cadastro integer,
-	data_alteracao integer,
-	foreign key(id_empresa) references empresa(id_empresa)
+	data_alteracao integer
+--	foreign key(id_empresa) references empresa(id_empresa)
 );
 
 create table if not exists usuario
@@ -55,7 +57,7 @@ create table if not exists usuario
 	data_nas integer,
 	id_image integer,
 	us_ativo integer,
-	foreign key(id_empresa) references empresa(id_empresa),
-	foreign key(id_departamento) references departamento(id_departamento),
-	foreign key(id_image) references image(id_image)
+	foreign key(id_empresa) references empresa(id_empresa) on delete set null,
+	foreign key(id_departamento) references departamento(id_departamento) on delete set null,
+	foreign key(id_image) references image(id_image) on delete set null
 );
