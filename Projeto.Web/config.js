@@ -1,3 +1,3 @@
-const urlAPI = "http://localhost:5000";
-const urlSITE = window.location.origin;
+const urlAPI = "https://projetouninove.herokuapp.com";
+const urlSITE = "https://saviosg.github.io/Projeto-UNINOVE";
 
