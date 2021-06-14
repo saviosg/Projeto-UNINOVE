@@ -1,6 +1,9 @@
 # Introducão 
 Projeto em Javascript Puro, com a intencão de pegar/estudar um pouco mais sobre a base da linguagem, e praticar os estudos neste CRUD.
 
+# Demo
+- Frontend: https://saviosg.github.io/Projeto-UNINOVE/
+- Backend: https://projetouninove.herokuapp.com (somente endpoints)
 
 # Pontos alcançados
 
